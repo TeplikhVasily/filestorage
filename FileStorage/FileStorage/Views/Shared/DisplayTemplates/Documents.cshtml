@@ -1,0 +1,15 @@
+﻿@model IEnumerable<FileStorage.Models.DocumentViewModel>
+
+<table class="table">
+    <tr>
+        <th colspan="4">
+            Документы
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        @Html.DisplayFor(m => item)
+    }
+
+</table>

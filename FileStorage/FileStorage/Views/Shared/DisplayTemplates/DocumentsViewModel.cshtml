@@ -1,0 +1,27 @@
+﻿@*@model FileStorage.Models.DocumentViewModel
+
+
+<tr>
+
+    @Html.DisplayFor(m => m.Id)
+    <td>
+        @Html.LabelFor(m => m.Name)
+        @Html.DisplayFor(m => m.Name)
+    </td>
+    <td>
+        @Html.LabelFor(m => m.OwnerId)
+        @Html.DisplayFor(m => m.OwnerId)
+    </td>
+    <td>@Html.EditorFor(m => m.Id)</td>
+
+    <td>
+        @Html.LabelFor(m => m.Name)
+        @Html.EditorFor(m => m.Name)
+    </td>
+    <td>
+        @Html.LabelFor(m => m.OwnerId)
+        @Html.EditorFor(m => m.OwnerId)
+    </td>
+
+
+</tr>*@

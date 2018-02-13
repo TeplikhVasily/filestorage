@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DbStorage.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список пользователей</h2>
+
+<p>
+    @Html.ActionLink("Создать пользователя", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                
+                <button type="button" id="ban_@(item.Id)" onclick="ban(@item.Id)" class="btn btn-warning">
+                    @(item.Status == DbStorage.Models.UserStatus.Blocked ? "Разбанить" : "Забанить")
+                </button>
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<div id="error"></div>
+<script type="text/javascript">
+    function ban(id) {
+        $("#error").empty();
+        $.ajax({
+            url: "@(Url.Action("Ban", "Admin"))",
+            method: "POST",
+            data: { id }
+        })
+        .success(function (result) {
+            if (result.success) {
+                $("#ban_" + id).html(result.message);
+            } else {
+                $("#error").html(result.error);
+            }
+        }
+        );
+    }
+</script>

@@ -1,0 +1,58 @@
+﻿@using FileStorage.Extensions
+@model IEnumerable<DbStorage.Models.Document>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("↑", "SortByName", "Document", new { type = "up" }, null)
+                @Html.ActionLink("↓", "SortByName", "Document", new { type = "down" }, null)
+                Название файла
+            </th>
+            <th>
+                @Html.ActionLink("↑", "SortByCreateDate", "Document", new { type = "up" }, null)
+                @Html.ActionLink("↓", "SortByCreateDate", "Document", new { type = "down" }, null)
+                Дата загрузки
+            </th>
+            <th>
+                @Html.ActionLink("↑", "SortByAuthor", "Document", new { type = "up" }, null)
+                @Html.ActionLink("↓", "SortByAuthor", "Document", new { type = "down" }, null)
+                Автор
+            </th>
+            <th>
+                
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Name.Length > 30)
+                    {
+                        var name = item.Name.Substring(0, 30) + " ...";
+                        @Html.DisplayFor(modelItem => name)
+                    }
+                    else
+                    { 
+                        @Html.DisplayFor(modelItem => item.Name)
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.FirstName)
+                    @Html.DisplayFor(modelItem => item.Author.LastName)
+                </td>
+                <td>
+                    <a href="Document/GetBytes/@item.Id">@Html.Submit("Загрузить")</a>
+                </td>
+                <td>
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>

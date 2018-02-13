@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="DbStorage"
+                   namespace="DbStorage.Models">
+
+  <class name="Document" table ="[Document]">
+    <id name="Id" column="Id" type="long">
+      <generator class="native" />
+    </id>
+    <property name="Name" />
+    <property name="FileType" />
+    <property name="CreationDate" />
+    
+    <many-to-one name="Author" class="User" column="AuthorId" lazy="false"/>
+    
+    <property name="Data" length="2147483647"/>
+
+
+  </class>
+
+</hibernate-mapping>

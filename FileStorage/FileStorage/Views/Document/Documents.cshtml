@@ -1,0 +1,22 @@
+﻿@using FileStorage.Extensions
+@{
+    ViewBag.Title = "Documents";
+}
+
+<h2>Хранилище</h2>
+
+<div>
+    @using (Ajax.BeginForm("DocumentSearch", null))
+    {
+        <input type="text" name="name" />
+        @Html.Submit("Поиск")
+    }
+</div>
+
+
+@{Html.RenderPartial("_DocumentList"); }
+
+
+<td>
+    <a href="Document/Create/">@Html.Submit("Загрузить новый документ")</a>
+</td>
